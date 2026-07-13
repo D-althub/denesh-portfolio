@@ -97,18 +97,18 @@ export function AboutSection() {
             <div className="grid grid-cols-3 gap-6 pt-4 border-t border-zinc-800/80">
               <div>
                 <div className="font-serif text-3xl font-bold text-white">
-                  3+
+                  3
                 </div>
                 <div className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mt-1">
-                  Feature & Series Slates
+                  Concepts Under Development
                 </div>
               </div>
               <div>
                 <div className="font-serif text-3xl font-bold text-[#D4AF37]">
-                  12
+                  3+
                 </div>
                 <div className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mt-1">
-                  Festival Selections
+                  Feature & Series Slates
                 </div>
               </div>
               <div>
@@ -148,11 +148,11 @@ export function AboutSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: idx * 0.1 }}
-                    className="relative flex flex-col md:flex-row items-center"
+                    className="relative flex flex-col md:flex-row items-center justify-between min-h-[110px]"
                   >
                     {/* Left Column (Desktop) */}
                     <div
-                      className={`w-full md:w-1/2 px-6 ${
+                      className={`w-full md:w-[calc(50%-32px)] px-6 ${
                         isEven ? "md:text-right" : "md:order-2 md:text-left"
                       }`}
                     >
@@ -169,14 +169,14 @@ export function AboutSection() {
                       </div>
                     </div>
 
-                    {/* Center Icon Node */}
-                    <div className="z-10 my-4 md:my-0 flex h-10 w-10 items-center justify-center rounded-full border border-[#D4AF37] bg-[#090909] shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+                    {/* Center Icon Node - Perfectly pinned to the vertical center line */}
+                    <div className="z-10 my-4 md:my-0 md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#D4AF37] bg-[#090909] shadow-[0_0_15px_rgba(212,175,55,0.3)]">
                       <Sparkles className="h-4 w-4 text-[#D4AF37]" />
                     </div>
 
                     {/* Right spacer */}
                     <div
-                      className={`w-full md:w-1/2 px-6 hidden md:block ${
+                      className={`w-full md:w-[calc(50%-32px)] px-6 hidden md:block ${
                         isEven ? "" : "md:order-1"
                       }`}
                     />

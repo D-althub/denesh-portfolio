@@ -25,13 +25,13 @@ export interface DevelopingConcept {
 export interface StoryLabItem {
   id: string;
   category:
-    | "Characters"
-    | "World Building"
-    | "Screenplays"
-    | "Visual References"
-    | "Moodboards"
-    | "Dialogue Experiments"
-    | "Research Notes";
+  | "Characters"
+  | "World Building"
+  | "Screenplays"
+  | "Visual References"
+  | "Moodboards"
+  | "Dialogue Experiments"
+  | "Research Notes";
   title: string;
   excerpt: string;
   details: string;
@@ -43,13 +43,13 @@ export interface GalleryItem {
   id: string;
   title: string;
   category:
-    | "Concept Art"
-    | "Location Photos"
-    | "Behind the Scenes"
-    | "Storyboard Frames"
-    | "Film Stills"
-    | "Color Palettes"
-    | "Moodboards";
+  | "Concept Art"
+  | "Location Photos"
+  | "Behind the Scenes"
+  | "Storyboard Frames"
+  | "Film Stills"
+  | "Color Palettes"
+  | "Moodboards";
   imageUrl: string;
   aspect: "tall" | "wide" | "square";
   description?: string;
@@ -134,13 +134,13 @@ export const initialPortfolioData: PortfolioData = {
     timeline: [
       {
         title: "Started Writing",
-        year: "2018",
+        year: "2021",
         description:
           "Penned early stage plays and atmospheric character studies exploring isolation and human connection.",
       },
       {
         title: "Working in Projects",
-        year: "2025–Present",
+        year: "2026–Present",
         description:
           "Active production and directing on romantic drama feature 'Untold stories'.",
       },

@@ -49,9 +49,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${spaceGrotesk.variable} ${inter.variable} ${cinzel.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-[#090909] text-zinc-100 font-sans selection:bg-[#D4AF37]/30 selection:text-white">
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-[#090909] text-zinc-100 font-sans selection:bg-[#D4AF37]/30 selection:text-white"
+      >
         <Providers>{children}</Providers>
       </body>
     </html>
