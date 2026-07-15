@@ -6,10 +6,12 @@ import { motion } from "framer-motion";
 import { Film, Calendar, CheckCircle2, Circle, ArrowRight, Sparkles } from "lucide-react";
 import { usePortfolio } from "@/context/PortfolioContext";
 import { initialPortfolioData } from "@/data/portfolioData";
+import { getProjectRoute } from "@/utils/projectRoutes";
 
 export function FeaturedProjectSection() {
   const { data } = usePortfolio();
-  const project: any = (data as any).featuredProject || data.projects[0] || (initialPortfolioData as any).featuredProject;
+  const publicProjects = (data.projects || []).filter((p) => !p.visibility || p.visibility === "public");
+  const project: any = (data as any).featuredProject || publicProjects[0] || (initialPortfolioData as any).featuredProject;
 
   if (!project) return null;
 
@@ -104,7 +106,7 @@ export function FeaturedProjectSection() {
                   THEMES EXPLORED
                 </span>
                 <div className="flex flex-wrap gap-2.5">
-                  {project.themes.map((theme: any, i: number) => (
+                  {project.themes && project.themes.map((theme: any, i: number) => (
                     <span
                       key={i}
                       className="px-4 py-2 rounded-md bg-[#121212] border border-[#C6A55C]/20 text-xs font-mono text-[#FFFFFF]"
@@ -119,7 +121,7 @@ export function FeaturedProjectSection() {
             {/* Read More Button to Dedicated Project Page */}
             <div className="pt-6 border-t border-zinc-800">
               <Link
-                href={`/projects/${project.slug}`}
+                href={getProjectRoute(project.slug || project.id || project.title)}
                 className="group inline-flex items-center gap-3 px-8 py-4 rounded border border-[#C6A55C] bg-[#C6A55C] text-black font-mono text-xs uppercase tracking-[0.25em] font-semibold transition-all hover:bg-[#C6A55C]/90 shadow-[0_0_25px_rgba(198,165,92,0.3)]"
               >
                 <span>Read Full Production Dossier</span>

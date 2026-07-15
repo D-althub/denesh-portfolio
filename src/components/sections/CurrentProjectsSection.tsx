@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePortfolio } from "@/context/PortfolioContext";
 import { Project } from "@/data/portfolioData";
@@ -13,10 +14,11 @@ import {
   Sparkles,
   ArrowRight,
 } from "lucide-react";
+import { getProjectRoute } from "@/utils/projectRoutes";
 
 export function CurrentProjectsSection() {
   const { data } = usePortfolio();
-  const { projects } = data;
+  const projects = (data.projects || []).filter((p) => !p.visibility || p.visibility === "public");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
@@ -220,6 +222,16 @@ export function CurrentProjectsSection() {
                       {selectedProject.expectedCompletion}
                     </span>
                   </div>
+                </div>
+
+                <div className="pt-4 border-t border-zinc-800">
+                  <Link
+                    href={getProjectRoute(selectedProject.id || selectedProject.title)}
+                    className="w-full group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded border border-[#D4AF37] bg-[#D4AF37]/10 text-[#D4AF37] font-mono text-xs uppercase tracking-[0.25em] font-semibold transition-all hover:bg-[#D4AF37] hover:text-black shadow-[0_0_20px_rgba(212,175,55,0.25)]"
+                  >
+                    <span>Enter Full Cinematic Dossier</span>
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
                 </div>
               </div>
             </motion.div>

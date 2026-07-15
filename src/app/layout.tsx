@@ -37,6 +37,11 @@ export const metadata: Metadata = {
     description: "Writer • Director • Storyteller. Explore feature films, dramatic narratives, and immersive storytelling.",
     type: "website",
   },
+  icons: {
+    icon: "/images/logo-icon.png",
+    shortcut: "/images/logo-icon.png",
+    apple: "/images/logo-icon.png",
+  },
 };
 
 import { Providers } from "@/components/Providers";

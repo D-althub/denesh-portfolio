@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/navigation/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import { Film, ArrowLeft, Calendar, Sparkles, CheckCircle2 } from "lucide-react";
+import { ProjectDynamicGallery } from "@/components/projects/ProjectDynamicGallery";
 
 export const metadata: Metadata = {
   title: "Untold Stories | Denesh Satya Sai",
@@ -285,6 +286,8 @@ export default function UntoldStoriesPage() {
               </div>
             ))}
           </div>
+
+          <ProjectDynamicGallery projectTitle="Untold Stories" />
         </div>
 
         {/* Development Timeline */}

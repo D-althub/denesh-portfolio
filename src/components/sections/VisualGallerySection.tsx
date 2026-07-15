@@ -9,7 +9,7 @@ import { Eye, X, Maximize2 } from "lucide-react";
 const GALLERY_CATEGORIES: GalleryItem["category"][] = [
   "Film Stills",
   "Concept Art",
-  "Location Photos",
+  "Location Scouting",
   "Behind the Scenes",
   "Storyboard Frames",
   "Color Palettes",

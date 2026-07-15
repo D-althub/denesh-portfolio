@@ -15,123 +15,117 @@ import {
 import { ProjectDynamicGallery } from "@/components/projects/ProjectDynamicGallery";
 
 export const metadata: Metadata = {
-  title: "3 Days Journey | Denesh Satya Sai",
+  title: "The Love | Denesh Satya Sai",
   description:
-    "Official production dossier for 3 DAYS JOURNEY — a road trip dramatic thriller written and directed by Denesh Satya Sai.",
-  openGraph: {
-    title: "3 Days Journey | Denesh Satya Sai",
-    description:
-      "A seventy-two hour road voyage that unravels unspoken secrets and transforms three lives.",
-    type: "website",
-  },
+    "Official production dossier for THE LOVE — a poetic romantic drama written and directed by Denesh Satya Sai.",
 };
 
 const project = {
-  title: "3 Days Journey",
-  status: "Story Under Development",
-  genre: "Road Trip Drama • Thriller",
+  title: "The Love",
+  status: "In Development",
+  genre: "Romantic Drama • Poetic Cinema",
   description:
-    "A transformative seventy-two hour road voyage across shifting terrains that tests relationships, secrets, and survival.",
+    "An intimate exploration of memory, devotion, and the unseen threads that bind two souls across decades of silence.",
   synopsis:
-    "Spanning three consecutive days along a desolate highway, 3 DAYS JOURNEY follows three estranged companions whose vehicle breaks down miles from civilization. As temperatures drop and hidden truths emerge, the physical journey becomes a psychological reckoning. Featuring kinetic hand-held camerawork mixed with sweeping panoramic drone vistas, the film explores solitude, survival, and what remains when pretense is stripped away.",
-  productionStatus: "Screenplay Locked — Principal Scouting Complete",
-  posterUrl: "/images/3-days-journey.jpg",
+    "Set against the monsoon rains and historic architecture of coastal India, THE LOVE explores the unvoiced passion between an archival restorer and a classical violinist. When a long-lost journal surfaces from the 1970s, their present lives begin to mirror an unfinished romance from the past. Through sensual texture, ambient acoustics, and painterly compositions, the film examines whether true devotion is measured by presence or by what remains across time.",
+  productionStatus: "Treatment Complete — Casting & Acoustic Design",
+  posterUrl: "/images/untold-stories.jpg",
   directorNotes:
-    "Kinetic hand-held camerawork mixed with sweeping panoramic drone shots capturing vast horizons and psychological claustrophobia under open skies.",
+    "A symphony of silence, rain, and tactile texture. Every frame is composed to feel like an impressionist painting where emotion speaks louder than dialogue.",
   themes: [
-    "Isolation vs. Human Connection",
-    "Psychological Reckoning",
-    "Survival Against Nature & Self",
-    "Unmasking Hidden Truths",
+    "Memory as an Active Presence",
+    "The Architecture of Devotion",
+    "Unspoken vs. Spoken Truths",
+    "Time and Emotional Resonance",
   ],
   characters: [
     {
-      name: "Vikram Mehta",
+      name: "Kabir Varma",
       role: "Lead Protagonist",
-      actorOrArchetype: "Disillusioned Photojournalist",
+      actorOrArchetype: "Archival Restorer",
       description:
-        "Carrying decades of conflict photography behind his viewfinder, Vikram is forced to put down the camera and experience raw reality when their survival is threatened.",
-      imageUrl: "/images/3-days-journey.jpg",
+        "Meticulous, quiet, and deeply attuned to historical fragility, Kabir discovers that preserving the past often forces a confrontation with one's own emotional isolation.",
+      imageUrl: "/images/untold-stories.jpg",
     },
     {
-      name: "Aanya Sen",
+      name: "Meera Nair",
       role: "Lead Protagonist",
-      actorOrArchetype: "Environmental Researcher",
+      actorOrArchetype: "Classical Violinist",
       description:
-        "Analytical and fiercely guarded, Aanya holds the key to the mysterious reason they embarked on this seventy-two hour highway expedition.",
+        "Passionate and spontaneous, Meera seeks an artistic language that transcends formal technique, finding resonance in Kabir's silent dedication.",
       imageUrl: "/images/denesh-portrait.jpg",
     },
   ],
   visualReferences: [
     {
-      title: "Desolate Highway Magic Hour",
-      description: "Long shadows stretching across cracked asphalt with warm amber tungsten headlights.",
-      imageUrl: "/images/3-days-journey.jpg",
+      title: "Monsoon Courtyard Reflections",
+      description: "Soft diffused daylight falling on wet stone and antique mahogany.",
+      imageUrl: "/images/untold-stories.jpg",
     },
     {
-      title: "Hand-held Claustrophobic Interiors",
-      description: "Textured dashboard reflections and rain-streaked glass framing quiet tension.",
-      imageUrl: "/images/untold-stories.jpg",
+      title: "Chiaroscuro Chamber Interiors",
+      description: "Warm candlelit tones contrasted with cool rain-streaked windowpanes.",
+      imageUrl: "/images/3-days-journey.jpg",
     },
   ],
   conceptArt: [
     {
-      title: "The Breakdown at Mile 142",
-      description: "Digital matte painting and storyboard master frame for the Act I inciting incident.",
-      imageUrl: "/images/3-days-journey.jpg",
+      title: "The Archival Chamber Discovery",
+      description: "Master concept study capturing dust motes suspended in warm afternoon light.",
+      imageUrl: "/images/cursed-wings.jpg",
     },
     {
-      title: "Desert Nightfall Horizon",
-      description: "Color script study emphasizing deep indigo sky vs warm campfire embers.",
-      imageUrl: "/images/cursed-wings.jpg",
+      title: "Coastal Cliff Magic Hour",
+      description: "Color palette test exploring deep emerald and gold sunset hues.",
+      imageUrl: "/images/the-saviour.jpg",
     },
   ],
   gallery: [
     {
-      title: "Location Scout: Dry Lake Bed",
-      description: "Wide angle 16mm test frame.",
-      imageUrl: "/images/3-days-journey.jpg",
-    },
-    {
-      title: "Anamorphic Flare Study",
-      description: "Vintage lens flare characterization.",
+      title: "Acoustic Rehearsal Hall",
+      description: "Framing composition study with natural bounce lighting.",
       imageUrl: "/images/untold-stories.jpg",
     },
     {
-      title: "Tension in the Rearview Mirror",
-      description: "Close-up composition test.",
-      imageUrl: "/images/the-saviour.jpg",
+      title: "Antique Journal Texture Study",
+      description: "Macro lens detail test on aged paper and ink.",
+      imageUrl: "/images/3-days-journey.jpg",
+    },
+    {
+      title: "Rain on Mahogany Frame",
+      description: "Mood and atmosphere test.",
+      imageUrl: "/images/denesh-portrait.jpg",
     },
   ],
   timeline: [
     {
-      stage: "Story Treatment & Road Map Architecture",
-      date: "Q2 2025",
-      description: "Completed 90-page intense psychological road thriller script.",
+      stage: "Poetic Treatment & Acoustic Architecture",
+      date: "Q3 2025",
+      description: "Drafted emotional treatment focusing on sound design and visual motifs.",
       completed: true,
     },
     {
-      stage: "Location Scouting Across Highway Vistas",
-      date: "Q4 2025",
-      description: "Scouted dry lake beds and isolated mountain passes across 1,200 miles.",
+      stage: "Architectural Scouting",
+      date: "Q1 2026",
+      description: "Scouted heritage libraries, courtyards, and coastal mansions.",
       completed: true,
     },
     {
-      stage: "Cast Attachment & Anamorphic Tests",
+      stage: "Lead Ensemble Casting",
       date: "Q3 2026",
-      description: "Securing lead ensemble and running kinetic camera rig tests.",
+      description: "Auditioning classical musicians and actors for authentic chemistry.",
       completed: false,
     },
     {
-      stage: "Principal Photography",
-      date: "Q1 2027",
-      description: "Scheduled 30-day chronological shoot on location along highway corridors.",
+      stage: "Principal Photography Window",
+      date: "Q2 2027",
+      description: "Targeting monsoon season for natural atmospheric lighting and rain textures.",
       completed: false,
     },
   ],
 };
 
-export default function ThreeDaysJourneyPage() {
+export default function TheLovePage() {
   return (
     <div className="min-h-screen bg-[#090909] text-white selection:bg-[#D4AF37]/30 selection:text-white">
       <Navbar />
@@ -154,7 +148,7 @@ export default function ThreeDaysJourneyPage() {
             <div className="lg:col-span-8">
               <div className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-[#D4AF37] mb-4">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>ROAD TRIP DRAMA • THRILLER</span>
+                <span>ROMANTIC DRAMA • POETIC CINEMA</span>
               </div>
 
               <h1 className="font-serif text-6xl sm:text-7xl lg:text-8xl text-white font-light tracking-tight leading-none mb-6">
@@ -191,10 +185,10 @@ export default function ThreeDaysJourneyPage() {
             <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
               <div>
                 <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#D4AF37]">
-                  ANAMORPHIC MASTER FRAME
+                  POETIC CINEMA MASTER FRAME
                 </span>
                 <p className="font-serif text-xl text-white mt-1">
-                  Seventy-Two Hour Highway Sequence
+                  Monsoon Courtyard Acoustic Sequence
                 </p>
               </div>
               <Film className="w-6 h-6 text-[#D4AF37]" />
@@ -395,7 +389,7 @@ export default function ThreeDaysJourneyPage() {
             ))}
           </div>
 
-          <ProjectDynamicGallery projectTitle="3 Days Journey" />
+          <ProjectDynamicGallery projectTitle="The Love" />
         </div>
 
         {/* 6. Development Timeline */}

@@ -1,16 +1,7 @@
 import { Navbar } from "@/components/navigation/Navbar";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { AboutSection } from "@/components/sections/AboutSection";
+import { FeaturedProjectSection } from "@/components/sections/FeaturedProjectSection";
 import { CurrentProjectsSection } from "@/components/sections/CurrentProjectsSection";
-import { DevelopingConceptsSection } from "@/components/sections/DevelopingConceptsSection";
-import { StoryLabSection } from "@/components/sections/StoryLabSection";
-import { VisualGallerySection } from "@/components/sections/VisualGallerySection";
-import { ShowreelSection } from "@/components/sections/ShowreelSection";
-import { FilmographySection } from "@/components/sections/FilmographySection";
-import { WritingProcessSection } from "@/components/sections/WritingProcessSection";
-import { BlogJournalSection } from "@/components/sections/BlogJournalSection";
-import { CollaborationSection } from "@/components/sections/CollaborationSection";
-import { ContactSection } from "@/components/sections/ContactSection";
 import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
@@ -19,19 +10,11 @@ export default function Home() {
       <Navbar />
       <main className="relative overflow-hidden">
         <HeroSection />
-        <AboutSection />
+        <FeaturedProjectSection />
         <CurrentProjectsSection />
-        <DevelopingConceptsSection />
-        <StoryLabSection />
-        <VisualGallerySection />
-        <ShowreelSection />
-        <FilmographySection />
-        <WritingProcessSection />
-        <BlogJournalSection />
-        <CollaborationSection />
-        <ContactSection />
       </main>
       <Footer />
     </div>
   );
 }
+

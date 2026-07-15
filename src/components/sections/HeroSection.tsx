@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { usePortfolio } from "@/context/PortfolioContext";
 
@@ -77,12 +77,12 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.65 }}
             className="flex flex-wrap items-center gap-5"
           >
-            <a
-              href="#about"
+            <Link
+              href="/about"
               className="border border-[#D4AF37] text-[#D4AF37] px-7 py-3.5 text-xs font-mono uppercase tracking-[0.25em] transition duration-300 hover:bg-[#D4AF37] hover:text-black"
             >
               EXPLORE MY WORLD
-            </a>
+            </Link>
 
             <a
               href="#projects"

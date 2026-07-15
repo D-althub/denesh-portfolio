@@ -14,6 +14,7 @@ import {
   Clock,
   Layers,
 } from "lucide-react";
+import { ProjectDynamicGallery } from "@/components/projects/ProjectDynamicGallery";
 
 export const metadata: Metadata = {
   title: "Cursed Wings | Denesh Satya Sai",
@@ -427,6 +428,11 @@ export default function CursedWingsPage() {
             ))}
           </div>
         </section>
+
+        {/* Dynamic Studio Vault Gallery */}
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 mb-20">
+          <ProjectDynamicGallery projectTitle="Cursed Wings" />
+        </div>
 
         {/* Section 9: INSPIRATIONS */}
         <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 mb-20">

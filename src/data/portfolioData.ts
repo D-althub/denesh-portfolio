@@ -1,14 +1,39 @@
+export type ProjectType = "Short Film" | "Web Series" | "Feature Film" | "Script Only" | "Concept";
+export type ProjectStatus = "Idea" | "Writing" | "Development" | "Pre Production" | "Production" | "Post Production" | "Released" | "Archived";
+
 export interface Project {
   id: string;
+  slug?: string;
+  projectType?: ProjectType;
   title: string;
   status: string;
   genre: string;
   progress: number;
   description: string;
+  logline?: string;
+  synopsis?: string;
+  overview?: string;
   developmentStage: string;
   expectedCompletion: string;
   posterUrl: string;
+  heroBannerUrl?: string;
   directorNotes?: string;
+  visibility?: "public" | "draft" | "private";
+  createdDate?: string;
+  updatedDate?: string;
+  seasons?: { seasonNumber: number; title: string; synopsis?: string }[];
+  episodes?: { id: string; seasonNumber: number; episodeNumber: number; title: string; synopsis: string; videoUrl: string; duration?: string }[];
+  cast?: { id: string; name: string; roleName: string; bio?: string; imageUrl?: string }[];
+  crew?: { id: string; name: string; department: string; role: string }[];
+  scriptVersions?: { id: string; version: string; date: string; notes: string; status: string }[];
+  festivalSection?: { id: string; festivalName: string; awardOrSelection: string; year: string }[];
+  worldBuilding?: { title: string; description: string }[];
+  characters?: { name: string; arc: string; notes?: string }[];
+  locations?: { name: string; description: string; imageUrl?: string }[];
+  researchNotes?: { topic: string; content: string }[];
+  moodboard?: { title: string; imageUrl: string; caption?: string }[];
+  videos?: { id: string; title: string; url: string; type: "Trailer" | "BTS" | "Scene" | "Short" }[];
+  timeline?: { stage: string; date: string; description: string; completed: boolean }[];
 }
 
 export interface DevelopingConcept {
@@ -20,39 +45,31 @@ export interface DevelopingConcept {
   status: string;
   isBlurred?: boolean;
   posterUrl?: string;
-}
-
-export interface StoryLabItem {
-  id: string;
-  category:
-  | "Characters"
-  | "World Building"
-  | "Screenplays"
-  | "Visual References"
-  | "Moodboards"
-  | "Dialogue Experiments"
-  | "Research Notes";
-  title: string;
-  excerpt: string;
-  details: string;
-  tags: string[];
-  date: string;
+  visibility?: "public" | "draft" | "private";
 }
 
 export interface GalleryItem {
   id: string;
   title: string;
   category:
-  | "Concept Art"
-  | "Location Photos"
   | "Behind the Scenes"
-  | "Storyboard Frames"
+  | "Projects"
+  | "Concept Art"
+  | "Posters"
+  | "Location Scouting"
+  | "Production"
   | "Film Stills"
+  | "Storyboard Frames"
   | "Color Palettes"
   | "Moodboards";
   imageUrl: string;
   aspect: "tall" | "wide" | "square";
   description?: string;
+  visibility?: "public" | "draft" | "private";
+  project?: string;
+  date?: string;
+  altText?: string;
+  photographer?: string;
 }
 
 export interface FilmographyItem {
@@ -64,6 +81,7 @@ export interface FilmographyItem {
   logline: string;
   festivals?: string[];
   runtime?: string;
+  visibility?: "public" | "draft" | "private";
 }
 
 export interface BlogArticle {
@@ -74,6 +92,7 @@ export interface BlogArticle {
   category: string;
   excerpt: string;
   content: string;
+  visibility?: "public" | "draft" | "private";
 }
 
 export interface Testimonial {
@@ -82,6 +101,37 @@ export interface Testimonial {
   author: string;
   role: string;
   production: string;
+}
+
+export interface ContactInfo {
+  email: string;
+  phone?: string;
+  location?: string;
+  quote?: string;
+}
+
+export interface SocialLinks {
+  instagram: string;
+  imdb: string;
+  linkedin: string;
+  email: string;
+}
+
+export interface SeoSettings {
+  title: string;
+  description: string;
+  keywords: string[];
+}
+
+export interface MessageItem {
+  id: string;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  date: string;
+  read: boolean;
+  replied?: boolean;
 }
 
 export interface PortfolioData {
@@ -99,7 +149,6 @@ export interface PortfolioData {
   };
   projects: Project[];
   concepts: DevelopingConcept[];
-  storyLab: StoryLabItem[];
   gallery: GalleryItem[];
   filmography: FilmographyItem[];
   blog: BlogArticle[];
@@ -111,6 +160,10 @@ export interface PortfolioData {
     favoriteGenres: string[];
     inspirations: string[];
   };
+  contactInfo: ContactInfo;
+  socialLinks: SocialLinks;
+  seo: SeoSettings;
+  messages: MessageItem[];
 }
 
 export const initialPortfolioData: PortfolioData = {
@@ -167,59 +220,100 @@ export const initialPortfolioData: PortfolioData = {
   projects: [
     {
       id: "untold-stories",
+      slug: "untold-stories",
+      projectType: "Feature Film",
       title: "Untold stories",
-      status: "Working in Projects",
+      status: "Production",
       genre: "Romantic Drama",
       progress: 80,
       description:
         "A heartfelt romantic drama exploring how time, destiny, and love reunite two souls separated by life's choices.",
+      logline: "When years of separation end at a crossroads, two former lovers must decide if destiny can rewrite the choices that pulled them apart.",
+      synopsis: "Untold Stories is an intimate feature film exploring the fragile intersection of memory, regret, and enduring love across two distinct timelines.",
       developmentStage: "Active Production & Final Polish",
       expectedCompletion: "Q4 2026",
       posterUrl: "/images/untold-stories.jpg",
       directorNotes:
         "Exploring warm anamorphic lenses and natural twilight lighting to capture the bittersweet passage of years.",
+      visibility: "public",
+      createdDate: "2026-01-15",
+      updatedDate: "2026-07-15",
+      cast: [
+        { id: "cast-1", name: "Elena Rostova", roleName: "Maya", bio: "Lead protagonist navigating past echoes." },
+        { id: "cast-2", name: "David Vance", roleName: "Julian", bio: "The architect haunted by what could have been." }
+      ],
+      crew: [
+        { id: "crew-1", name: "Denesh Satya Sai", department: "Directing", role: "Director & Writer" }
+      ]
     },
     {
       id: "3-days-journey",
+      slug: "3-days-journey",
+      projectType: "Feature Film",
       title: "3 Days journey",
-      status: "Story Under Development",
+      status: "Development",
       genre: "Road Trip Drama • Thriller",
       progress: 60,
       description:
         "A transformative seventy-two hour journey across shifting terrains that tests relationships, secrets, and survival.",
+      logline: "Stranded across 800 miles of unforgiving terrain, three companions uncover secrets that turn a cross-country drive into a psychological reckoning.",
       developmentStage: "Screenplay Architecture & Location Scouting",
       expectedCompletion: "Q1 2027",
       posterUrl: "/images/3-days-journey.jpg",
       directorNotes:
         "Kinetic hand-held camerawork mixed with sweeping panoramic drone shots capturing vast horizons.",
+      visibility: "public",
+      createdDate: "2026-02-10",
+      updatedDate: "2026-07-15",
     },
     {
       id: "the-love",
+      slug: "the-love",
+      projectType: "Short Film",
       title: "The love",
-      status: "Story Under Development",
+      status: "Writing",
       genre: "Intimate Drama",
       progress: 45,
       description:
         "An exploration of devotion, unspoken vulnerabilities, and what remains when infatuation evolves into endurance.",
+      logline: "In the silence of a single evening, a couple faces the quiet chasm between passion and devotion.",
       developmentStage: "Character Profiles & Act II Polish",
       expectedCompletion: "Q2 2027",
       posterUrl: "/images/untold-stories.jpg",
       directorNotes:
         "Intimate close-ups and ambient soundscapes emphasizing quiet pauses between lines.",
+      visibility: "public",
+      createdDate: "2026-03-01",
+      updatedDate: "2026-07-15",
     },
     {
       id: "cursed-wings-series",
+      slug: "cursed-wings",
+      projectType: "Web Series",
       title: "Cursed wings (series)",
-      status: "Story Under Development",
+      status: "Pre Production",
       genre: "Dark Fantasy Series",
       progress: 40,
       description:
         "A dark fantasy series exploring destiny, sacrifice, supernatural forces, and the hidden cost of power.",
+      logline: "Born with forbidden wings of obsidian, a rogue warrior must unite fractured kingdoms before an ancient blight consumes the realm.",
       developmentStage: "Series Bible & Pilot Script Architecture",
       expectedCompletion: "Q3 2027",
       posterUrl: "/images/cursed-wings.jpg",
       directorNotes:
         "Heavy emphasis on practical costume design and chiaroscuro shadow play.",
+      visibility: "public",
+      createdDate: "2026-03-20",
+      updatedDate: "2026-07-15",
+      seasons: [
+        { seasonNumber: 1, title: "Season 1: Obsidian Rise", synopsis: "The awakening of the cursed bloodline and the flight from the High Citadel." }
+      ],
+      episodes: [
+        { id: "ep-1", seasonNumber: 1, episodeNumber: 1, title: "Pilot: Blood & Feather", synopsis: "Vaelin discovers the dark mark upon his back as the inquisitors close in.", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", duration: "45m" }
+      ],
+      characters: [
+        { name: "Vaelin", arc: "From hunted outcast to reluctant leader of the winged rebellion." }
+      ]
     },
   ],
   concepts: [
@@ -257,48 +351,6 @@ export const initialPortfolioData: PortfolioData = {
       posterUrl: "/images/cursed-wings.jpg",
     },
   ],
-  storyLab: [
-    {
-      id: "char-1",
-      category: "Characters",
-      title: "Maya — Untold stories",
-      excerpt: "A classical pianist who measures time through unfinished compositions.",
-      details:
-        "Maya’s character arc revolves around accepting imperfection. Her apartment is filled with metronomes and antique sheet music from the 1970s.",
-      tags: ["Protagonist", "Music", "Arc: Forgiveness"],
-      date: "May 2026",
-    },
-    {
-      id: "world-1",
-      category: "World Building",
-      title: "The Obsidian Citadel — Cursed wings (series)",
-      excerpt: "Architectural rules of the high-altitude fortress where wings are forged.",
-      details:
-        "Constructed from volcanic basalt and brass conduits. Gravity behaves differently in the upper cloisters due to ancient atmospheric seals.",
-      tags: ["Architecture", "Fantasy Canon", "Lighting Notes"],
-      date: "June 2026",
-    },
-    {
-      id: "scr-1",
-      category: "Screenplays",
-      title: "Act II Turning Point — 3 Days journey",
-      excerpt: "Dialogue excerpt at the rainlit highway diner.",
-      details:
-        "EXT. HIGHWAY DINER - DUSK. Rain drums against the corrugated iron overhang. 'We didn't miss our chance. We just survived long enough to recognize it.'",
-      tags: ["Scene Study", "3 Days journey", "Dialogue Polish"],
-      date: "July 2026",
-    },
-    {
-      id: "vis-1",
-      category: "Visual References",
-      title: "35mm Grain & Tungsten Streetlights",
-      excerpt: "Study of shadow separation and anamorphic flares.",
-      details:
-        "Aiming for deep blacks with warm amber falloff. Avoid digital sharpness; soften highlights with 1/8 Black Pro-Mist filters.",
-      tags: ["Cinematography", "Color Grading", "Optics"],
-      date: "April 2026",
-    },
-  ],
   gallery: [
     {
       id: "gal-1",
@@ -306,31 +358,51 @@ export const initialPortfolioData: PortfolioData = {
       category: "Film Stills",
       imageUrl: "/images/untold-stories.jpg",
       aspect: "wide",
-      description: "Atmospheric test frame shot on 40mm anamorphic lens.",
+      description: "Atmospheric test frame shot on 40mm anamorphic prime lens with warm amber falloff.",
+      visibility: "public",
+      project: "Untold Stories",
+      date: "May 2026",
+      altText: "Maya playing classical piano in twilight apartment",
+      photographer: "Denesh Satya Sai Studio",
     },
     {
       id: "gal-2",
       title: "3 Days Journey Official Poster",
-      category: "Concept Art",
+      category: "Posters",
       imageUrl: "/images/3-days-journey.jpg",
       aspect: "tall",
-      description: "Official theatrical poster artwork for 3 Days Journey.",
+      description: "Official theatrical poster artwork for 3 Days Journey highway road chronicle.",
+      visibility: "public",
+      project: "3 Days Journey",
+      date: "June 2026",
+      altText: "Rainlit highway diner at dusk poster",
+      photographer: "DSS Art Dept",
     },
     {
       id: "gal-3",
       title: "The Saviour Poster Artwork",
-      category: "Concept Art",
+      category: "Posters",
       imageUrl: "/images/the-saviour.jpg",
       aspect: "tall",
-      description: "Atmospheric village artwork for The Saviour.",
+      description: "Atmospheric village artwork and character silhouette for The Saviour.",
+      visibility: "public",
+      project: "The Saviour",
+      date: "July 2026",
+      altText: "Secluded misty village silhouette poster",
+      photographer: "DSS Art Dept",
     },
     {
       id: "gal-4",
-      title: "Director Denesh Satya Sai Portrait",
+      title: "Director Denesh Satya Sai on Location",
       category: "Behind the Scenes",
       imageUrl: "/images/denesh-portrait.jpg",
       aspect: "tall",
-      description: "Director Denesh Satya Sai on location.",
+      description: "Director Denesh Satya Sai framing an anamorphic sequence on location.",
+      visibility: "public",
+      project: "Untold Stories",
+      date: "April 2026",
+      altText: "Director Denesh Satya Sai portrait on set",
+      photographer: "Elena Rostova",
     },
     {
       id: "gal-5",
@@ -338,7 +410,12 @@ export const initialPortfolioData: PortfolioData = {
       category: "Concept Art",
       imageUrl: "/images/cursed-wings.jpg",
       aspect: "square",
-      description: "Dark fantasy winged creature visual concept.",
+      description: "Dark fantasy winged creature and basalt citadel visual concept.",
+      visibility: "public",
+      project: "Cursed Wings",
+      date: "June 2026",
+      altText: "Dark fantasy basalt cloisters concept art",
+      photographer: "DSS Concept Lab",
     },
   ],
   filmography: [
@@ -441,4 +518,43 @@ However, cinema is fundamentally an intimate art form. When designing a cinemati
       "Global Poetic Realism",
     ],
   },
+  contactInfo: {
+    email: "rachabattunisatya7@gmail.com",
+    phone: "3332221110",
+    location: "Hyderabad / Mumbai // Available for Global Production Slate",
+    quote: "Every story deserves to be remembered.",
+  },
+  socialLinks: {
+    email: "mailto:rachabattunisatya7@gmail.com",
+    instagram: "https://www.instagram.com/_d_e_n_e___?igsh=MWRjMXVva3JwdHZxbg==",
+    imdb: "https://www.imdb.com/name/nm17442387/?ref_=tt_ov_1_1",
+    linkedin: "https://www.linkedin.com/in/denesh-satya-sai-394175278/",
+  },
+  seo: {
+    title: "Denesh Satya Sai • Filmmaker, Screenwriter & Director Studio",
+    description: "Official cinematic portfolio of independent filmmaker and director Denesh Satya Sai. Featuring theatrical productions, character drama dossiers, and directing methodology.",
+    keywords: ["Denesh Satya Sai", "Filmmaker", "Screenwriter", "Director", "Indian Cinema", "Untold Stories", "Cursed Wings", "Chamber Drama"],
+  },
+  messages: [
+    {
+      id: "msg-init-1",
+      name: "Julian Mercer // Mercer Films",
+      email: "julian@mercerfilms.com",
+      subject: "Co-Production Inquiry // Cursed Wings Season 1",
+      message: "Denesh, we reviewed the development dossier and concept frames for 'Cursed wings (series)'. Our executive production house is interested in discussing international distribution and co-financing options for Q1 2027.",
+      date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+      read: false,
+      replied: false,
+    },
+    {
+      id: "msg-init-2",
+      name: "Aria Thorne // Festival Curator",
+      email: "aria@indiecinemafest.org",
+      subject: "Screening Selection Dialogue // Untold Stories",
+      message: "We would like to invite 'Untold stories' for a special director's spotlight showcase at our upcoming European independent cinema symposium.",
+      date: new Date(Date.now() - 86400000 * 2).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+      read: true,
+      replied: true,
+    },
+  ],
 };

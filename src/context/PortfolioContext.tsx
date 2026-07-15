@@ -6,9 +6,9 @@ import {
   initialPortfolioData,
   Project,
   DevelopingConcept,
-  StoryLabItem,
   GalleryItem,
   BlogArticle,
+  MessageItem,
 } from "@/data/portfolioData";
 
 interface PortfolioContextType {
@@ -23,10 +23,6 @@ interface PortfolioContextType {
   addConcept: (concept: DevelopingConcept) => void;
   updateConcept: (id: string, updated: Partial<DevelopingConcept>) => void;
   deleteConcept: (id: string) => void;
-  // Story Lab operations
-  addStoryLabItem: (item: StoryLabItem) => void;
-  updateStoryLabItem: (id: string, updated: Partial<StoryLabItem>) => void;
-  deleteStoryLabItem: (id: string) => void;
   // Gallery operations
   addGalleryItem: (item: GalleryItem) => void;
   updateGalleryItem: (id: string, updated: Partial<GalleryItem>) => void;
@@ -35,6 +31,16 @@ interface PortfolioContextType {
   addBlogArticle: (article: BlogArticle) => void;
   updateBlogArticle: (id: string, updated: Partial<BlogArticle>) => void;
   deleteBlogArticle: (id: string) => void;
+  // Showreel operations
+  updateShowreel: (showreel: Partial<PortfolioData["showreel"]>) => void;
+  // Settings & Contact & SEO operations
+  updateContactInfo: (contactInfo: PortfolioData["contactInfo"]) => void;
+  updateSocialLinks: (socialLinks: PortfolioData["socialLinks"]) => void;
+  updateSeo: (seo: PortfolioData["seo"]) => void;
+  // Message operations
+  addMessage: (message: Omit<MessageItem, "id" | "date" | "read">) => void;
+  updateMessageStatus: (id: string, updated: Partial<MessageItem>) => void;
+  deleteMessage: (id: string) => void;
   // Reset & Backup
   resetToDefault: () => void;
   importData: (imported: PortfolioData) => void;
@@ -51,25 +57,43 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        setData(parsed);
+    async function loadData() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          setData(parsed);
+        }
+        // Sync from server persistence API if available
+        const res = await fetch("/api/portfolio");
+        if (res.ok) {
+          const serverData = await res.json();
+          if (serverData && serverData.projects && serverData.gallery) {
+            setData(serverData);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(serverData));
+          }
+        }
+      } catch (e) {
+        console.error("Failed to load studio data:", e);
+      } finally {
+        setIsLoaded(true);
       }
-    } catch (e) {
-      console.error("Failed to load studio data from localStorage:", e);
-    } finally {
-      setIsLoaded(true);
     }
+    loadData();
   }, []);
 
   useEffect(() => {
     if (isLoaded) {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        // Persist to server automatically
+        fetch("/api/portfolio", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }).catch(() => {});
       } catch (e) {
-        console.error("Failed to save studio data to localStorage:", e);
+        console.error("Failed to save studio data:", e);
       }
     }
   }, [data, isLoaded]);
@@ -95,10 +119,17 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
   };
 
   const deleteProject = (id: string) => {
-    setData((prev) => ({
-      ...prev,
-      projects: prev.projects.filter((p) => p.id !== id),
-    }));
+    setData((prev) => {
+      const targetProject = prev.projects.find((p) => p.id === id);
+      const targetTitle = targetProject?.title?.toLowerCase() || "";
+      return {
+        ...prev,
+        projects: prev.projects.filter((p) => p.id !== id),
+        gallery: prev.gallery.filter(
+          (g) => !g.project || (g.project !== id && g.project.toLowerCase() !== targetTitle)
+        ),
+      };
+    });
   };
 
   // Concepts
@@ -117,25 +148,6 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
     setData((prev) => ({
       ...prev,
       concepts: prev.concepts.filter((c) => c.id !== id),
-    }));
-  };
-
-  // Story Lab
-  const addStoryLabItem = (item: StoryLabItem) => {
-    setData((prev) => ({ ...prev, storyLab: [item, ...prev.storyLab] }));
-  };
-
-  const updateStoryLabItem = (id: string, updated: Partial<StoryLabItem>) => {
-    setData((prev) => ({
-      ...prev,
-      storyLab: prev.storyLab.map((s) => (s.id === id ? { ...s, ...updated } : s)),
-    }));
-  };
-
-  const deleteStoryLabItem = (id: string) => {
-    setData((prev) => ({
-      ...prev,
-      storyLab: prev.storyLab.filter((s) => s.id !== id),
     }));
   };
 
@@ -177,6 +189,49 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
     }));
   };
 
+  const updateShowreel = (showreel: Partial<PortfolioData["showreel"]>) => {
+    setData((prev) => ({
+      ...prev,
+      showreel: { ...prev.showreel, ...showreel },
+    }));
+  };
+
+  const updateContactInfo = (contactInfo: PortfolioData["contactInfo"]) => {
+    setData((prev) => ({ ...prev, contactInfo }));
+  };
+
+  const updateSocialLinks = (socialLinks: PortfolioData["socialLinks"]) => {
+    setData((prev) => ({ ...prev, socialLinks }));
+  };
+
+  const updateSeo = (seo: PortfolioData["seo"]) => {
+    setData((prev) => ({ ...prev, seo }));
+  };
+
+  const addMessage = (message: Omit<MessageItem, "id" | "date" | "read">) => {
+    const newMsg: MessageItem = {
+      ...message,
+      id: `msg-${Date.now()}`,
+      date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+      read: false,
+    };
+    setData((prev) => ({ ...prev, messages: [newMsg, ...(prev.messages || [])] }));
+  };
+
+  const updateMessageStatus = (id: string, updated: Partial<MessageItem>) => {
+    setData((prev) => ({
+      ...prev,
+      messages: (prev.messages || []).map((m) => (m.id === id ? { ...m, ...updated } : m)),
+    }));
+  };
+
+  const deleteMessage = (id: string) => {
+    setData((prev) => ({
+      ...prev,
+      messages: (prev.messages || []).filter((m) => m.id !== id),
+    }));
+  };
+
   const resetToDefault = () => {
     setData(initialPortfolioData);
     localStorage.removeItem(STORAGE_KEY);
@@ -198,15 +253,19 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
         addConcept,
         updateConcept,
         deleteConcept,
-        addStoryLabItem,
-        updateStoryLabItem,
-        deleteStoryLabItem,
         addGalleryItem,
         updateGalleryItem,
         deleteGalleryItem,
         addBlogArticle,
         updateBlogArticle,
         deleteBlogArticle,
+        updateShowreel,
+        updateContactInfo,
+        updateSocialLinks,
+        updateSeo,
+        addMessage,
+        updateMessageStatus,
+        deleteMessage,
         resetToDefault,
         importData,
       }}
