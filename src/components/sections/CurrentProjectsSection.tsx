@@ -126,14 +126,14 @@ export function CurrentProjectsSection() {
                     </div>
                   </div>
 
-                  {/* Details Trigger Button */}
-                  <button
-                    onClick={() => setSelectedProject(project)}
+                  {/* Details Trigger Link */}
+                  <Link
+                    href={getProjectRoute(project.id)}
                     className="w-full flex items-center justify-center space-x-2 rounded border border-zinc-800 bg-zinc-900/60 py-2.5 text-xs font-mono uppercase tracking-widest text-zinc-300 transition hover:border-[#D4AF37] hover:text-[#D4AF37]"
                   >
                     <span>View Production Dossier</span>
                     <ArrowRight className="h-3.5 w-3.5" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </motion.div>
